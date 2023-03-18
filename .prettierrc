@@ -6,7 +6,7 @@
     "^@/providers/(.*)$",
     "^@/services/(.*)$",
     "^@/assets/(.*)$",
-    "^@/types/(.*)$",
+    "^@/common/(.*)$",
     "^@/hooks/(.*)$",
     "^@/store/(.*)$",
     "^@/utils/(.*)$",
