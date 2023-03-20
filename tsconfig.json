@@ -28,7 +28,7 @@
       "@/utils/*": ["utils/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "src/declaration.d.ts"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

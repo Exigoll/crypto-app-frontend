@@ -3,7 +3,7 @@ import React from "react";
 
 import { IPropsLogin } from "@/common/types/auth";
 
-export const Login: React.FC<IPropsLogin> = ({
+const Login: React.FC<IPropsLogin> = ({
   setEmail,
   setPassword,
   navigate,
@@ -73,3 +73,5 @@ export const Login: React.FC<IPropsLogin> = ({
     </>
   );
 };
+
+export default Login;

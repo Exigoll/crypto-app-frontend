@@ -9,11 +9,11 @@ import { login } from "@/store/slice/auth";
 import { instance } from "@/utils/axios";
 import { useAppDispatch } from "@/utils/hooks";
 
-import { Login } from "./Login";
-import { Register } from "./Register";
+import Login from "./Login";
+import Register from "./Register";
 import "./style.scss";
 
-export const AuthRootComponent: React.FC = (): JSX.Element => {
+const AuthRoot: React.FC = (): JSX.Element => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [repeatPassword, setRepeatPassword] = React.useState("");
@@ -93,3 +93,5 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
     </div>
   );
 };
+
+export default AuthRoot;

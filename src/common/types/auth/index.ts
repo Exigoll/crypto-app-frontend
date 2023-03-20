@@ -11,7 +11,7 @@ export interface IPropsRegister extends IPropsLogin {
 }
 
 export interface IAuthState {
-  user: {};
+  user: IPublicUser;
   isLogged: boolean;
 }
 
