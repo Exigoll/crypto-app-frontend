@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { IAuthState } from "./../../../common/types/auth/index";
+import { IAuthState } from "@/common/types/auth";
 
 const initialState: IAuthState = {
   user: {
@@ -21,7 +21,7 @@ const initialState: IAuthState = {
       },
     ],
   },
-  isLogged: false,
+  isLogged: true /* -> false */,
 };
 
 export const authSlice = createSlice({

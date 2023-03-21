@@ -3,7 +3,7 @@ import React from "react";
 
 import { IPropsRegister } from "@/common/types/auth";
 
-export const Register: React.FC<IPropsRegister> = ({
+const Register: React.FC<IPropsRegister> = ({
   setEmail,
   setPassword,
   setRepeatPassword,
@@ -103,3 +103,5 @@ export const Register: React.FC<IPropsRegister> = ({
     </>
   );
 };
+
+export default Register;
