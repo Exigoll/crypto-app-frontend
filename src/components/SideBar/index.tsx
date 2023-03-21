@@ -1,11 +1,7 @@
 import {
-  AutoGraphOutlined,
   ChevronLeftOutlined,
   ChevronRightOutlined,
-  HomeOutlined,
   LogoutOutlined,
-  MenuBookOutlined,
-  SettingsOutlined,
 } from "@mui/icons-material";
 import {
   Box,
@@ -25,6 +21,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import FlexBetween from "@/components/FlexBetween";
 
+import Logo from "@/assets/images/side-bar/logo.svg";
+
+import { navMenu } from "@/common/moks/navigate";
+import { tokens } from "@/common/theme";
 import { ISideBar } from "@/common/types/sideBar";
 
 import { useStyles } from "./styles";
@@ -32,14 +32,31 @@ import { useStyles } from "./styles";
 const SideBar: FC<ISideBar> = (props: ISideBar) => {
   const [active, setActive] = useState("");
   const { isNonMobile, drawerWidth, isOpen, setIsOpen } = props;
-  //const classes = useStyles();
+  const classes = useStyles();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
     setActive(pathname.substring(1));
   }, [pathname]);
+
+  const renderNavMenu = navMenu.map(
+    (item): JSX.Element => (
+      <ListItem key={item.id}>
+        <ListItemButton
+          className={classes.navItem}
+          onClick={() => navigate(`${item.path}`)}
+        >
+          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemText>
+            <Typography>{item.title}</Typography>
+          </ListItemText>
+        </ListItemButton>
+      </ListItem>
+    )
+  );
 
   return (
     <Box component="nav">
@@ -59,11 +76,14 @@ const SideBar: FC<ISideBar> = (props: ISideBar) => {
             },
           }}
         >
-          <Box width="100%">
+          <Box className={classes.navBlock}>
             <Box>
               <FlexBetween>
-                <Box display="flex" alignItems="center" gap="10px">
-                  <Typography>Demo</Typography>
+                <Box className={classes.brand}>
+                  <img src={Logo} alt="Logo" />
+                  <Typography className={classes.brandTitle} variant="h1">
+                    CryptoPro
+                  </Typography>
                 </Box>
                 {!isNonMobile && (
                   <IconButton onClick={() => setIsOpen(!isOpen)}>
@@ -72,6 +92,21 @@ const SideBar: FC<ISideBar> = (props: ISideBar) => {
                 )}
               </FlexBetween>
             </Box>
+            <List className={classes.navList}>{renderNavMenu}</List>
+          </Box>
+          <Box width="100%">
+            <List>
+              <ListItem>
+                <ListItemButton className={classes.navItem}>
+                  <ListItemIcon>
+                    <LogoutOutlined />
+                  </ListItemIcon>
+                  <ListItemText>
+                    <Typography>Выход</Typography>
+                  </ListItemText>
+                </ListItemButton>
+              </ListItem>
+            </List>
           </Box>
         </Drawer>
       )}
