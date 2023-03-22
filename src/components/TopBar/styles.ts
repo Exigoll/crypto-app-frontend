@@ -8,18 +8,26 @@ export const useStyles = makeStyles((theme: Theme) => {
 
   return {
     root: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      maxHeight: "95px",
-      padding: "32px 24px",
+      position: "static",
       borderBottom: `1px solid ${colors.borderColor}`,
-      backgroundColor: colors.primary.DEFAULT,
+      background: `${colors.primary.DEFAULT} !important`,
+      boxShadow: "none !important",
+    },
+
+    toolbar: {
+      justifyContent: "space-between",
+      padding: "25px 50px",
+    },
+
+    menuIcon: {
+      marginRight: "10px",
+      cursor: "pointer",
     },
 
     iconBlock: {
-      paddingTop: "10px",
-      paddingRight: "37px",
+      display: "flex",
+      columnGap: "30px",
+      paddingRight: "35px",
       borderRight: `1px solid ${colors.borderColor}`,
     },
 
@@ -29,6 +37,7 @@ export const useStyles = makeStyles((theme: Theme) => {
 
     searchBlock: {
       display: "flex",
+      height: "48px",
       marginLeft: "28px",
       borderRadius: "8px",
       backgroundColor: `${colors.primary[600]}`,
