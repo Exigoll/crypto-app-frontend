@@ -1,11 +1,6 @@
-import {
-  ChevronLeftOutlined,
-  ChevronRightOutlined,
-  LogoutOutlined,
-} from "@mui/icons-material";
+import { ChevronLeftOutlined, LogoutOutlined } from "@mui/icons-material";
 import {
   Box,
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -16,6 +11,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { element } from "prop-types";
 import { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -24,27 +20,31 @@ import FlexBetween from "@/components/FlexBetween";
 import Logo from "@/assets/images/side-bar/logo.svg";
 
 import { navMenu } from "@/common/moks/navigate";
-import { ISideBar } from "@/common/types/sideBar";
+import { ISideBarProps } from "@/common/types/sidebar";
 
 import { useStyles } from "./styles";
 
-const SideBar: FC<ISideBar> = (props: ISideBar) => {
-  const [active, setActive] = useState("");
+const SideBar: FC<ISideBarProps> = (props: ISideBarProps): JSX.Element => {
   const { isNonMobile, drawerWidth, isOpen, setIsOpen } = props;
+  const [active, setActive] = useState("");
   const classes = useStyles();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
 
   useEffect(() => {
-    setActive(pathname.substring(1));
+    setActive(pathname);
   }, [pathname]);
 
   const renderNavMenu = navMenu.map(
     (item): JSX.Element => (
       <ListItem key={item.id}>
         <ListItemButton
-          className={classes.navItem}
+          className={
+            active === item.path
+              ? `${classes.navItem} ${classes.active}`
+              : classes.navItem
+          }
           onClick={() => navigate(`${item.path}`)}
         >
           <ListItemIcon>{item.icon}</ListItemIcon>

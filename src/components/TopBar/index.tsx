@@ -17,13 +17,14 @@ import {
 } from "@mui/material";
 import { FC, useContext } from "react";
 
-import { ColorModeContext } from "@/common/theme";
+import FlexBetween from "@/components/FlexBetween";
 
-import FlexBetween from "../FlexBetween";
+import { ColorModeContext } from "@/common/theme";
+import { ITopBarProps } from "@/common/types/topbar";
 
 import { useStyles } from "./styles";
 
-const TopBar = (props: any) => {
+const TopBar: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
   const { isOpen, setIsOpen } = props;
   const theme = useTheme();
   const colorMode: any = useContext(ColorModeContext);
@@ -61,12 +62,6 @@ const TopBar = (props: any) => {
       </Toolbar>
     </AppBar>
   );
-
-  {
-    /* <Box className={classes.root}>
-
-    </Box> */
-  }
 };
 
 export default TopBar;

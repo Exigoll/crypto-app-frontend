@@ -1,30 +1,22 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import React from "react";
+
+import AppButton from "@/components/AppButton";
 
 import { IPropsLogin } from "@/common/types/auth";
 
+import { useStyles } from "../styles";
+
 const Login: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
   const { navigate, register, errors } = props;
+  const classes = useStyles();
 
   return (
     <>
-      <Typography
-        sx={{
-          fontFamily: "Poppins",
-          textAlign: "center",
-        }}
-        variant="h3"
-      >
+      <Typography variant="h3" textAlign="center" fontSize="32px">
         Авторизация
       </Typography>
-      <Typography
-        sx={{
-          fontFamily: "Poppins",
-          textAlign: "center",
-          marginBottom: 3,
-        }}
-        variant="body1"
-      >
+      <Typography variant="body1" textAlign="center" marginBottom="3px">
         Введите логин и пароль
       </Typography>
       <TextField
@@ -49,26 +41,15 @@ const Login: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         helperText={errors.password ? `${errors.password.message}` : ""}
         {...register("password")}
       />
-      <Button
-        sx={{
-          fontFamily: "Poppins",
-          marginTop: 2,
-          marginBottom: 2,
-          width: "60%",
-        }}
-        type="submit"
-        variant="contained"
-      >
-        Вход
-      </Button>
-      <Typography
-        variant="body1"
-        sx={{
-          fontFamily: "Poppins",
-        }}
-      >
+      <AppButton type="submit" variant="contained">
+        Войти
+      </AppButton>
+      <Typography variant="body1">
         У Вас нет аккаунта?
-        <span className="incitingText" onClick={() => navigate("/register")}>
+        <span
+          className={classes.incitingText}
+          onClick={() => navigate("/register")}
+        >
           Регистрация
         </span>
       </Typography>
