@@ -9,13 +9,7 @@ export interface IPropsLogin<
   errors: FieldErrors<TFieldValues>;
 }
 
-export interface IPropsRegister extends IPropsLogin {
-  setEmail: (value: string) => void;
-  setPassword: (value: string) => void;
-  setRepeatPassword: (value: string) => void;
-  setFirstName: (value: string) => void;
-  setUserName: (value: string) => void;
-}
+export interface IPropsRegister extends IPropsLogin {}
 
 export interface IAuthState {
   user: IPublicUser;
