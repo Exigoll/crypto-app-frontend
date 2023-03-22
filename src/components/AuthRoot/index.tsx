@@ -14,12 +14,13 @@ import { LoginSchema, RegisterSchema } from "@/utils/validation";
 
 import Login from "./Login";
 import Register from "./Register";
-import "./style.scss";
+import { useStyles } from "./styles";
 
 const AuthRoot: FC = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const classes = useStyles();
   const {
     register,
     formState: { errors },
@@ -66,8 +67,8 @@ const AuthRoot: FC = (): JSX.Element => {
   };
 
   return (
-    <div className="root">
-      <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
+    <div className={classes.root}>
+      <form className={classes.form} onSubmit={handleSubmit(handleSubmitForm)}>
         <Box
           display="flex"
           flexDirection="column"
@@ -77,7 +78,7 @@ const AuthRoot: FC = (): JSX.Element => {
           margin="auto"
           padding={5}
           borderRadius={5}
-          boxShadow={`5px 5px 10px #ccc`}
+          boxShadow={`-3px -2px 20px 1px #202020`}
         >
           {location.pathname === "/login" ? (
             <Login navigate={navigate} register={register} errors={errors} />

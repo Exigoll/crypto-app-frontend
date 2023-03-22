@@ -2,11 +2,12 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 
 import AuthRoot from "@/components/AuthRoot";
-import Home from "@/components/Home";
 import Layout from "@/components/Layout";
-import News from "@/components/News";
-import Settings from "@/components/Settings";
-import Watchlist from "@/components/Watchlist";
+
+import Home from "@/pages/Home";
+import News from "@/pages/News";
+import Settings from "@/pages/Settings";
+import Watchlist from "@/pages/Watchlist";
 
 import { ColorModeContext, useMode } from "@/common/theme";
 

@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-export const useStyles: any = makeStyles({
+export const useStyles = makeStyles({
   root: {
     display: "flex",
     width: "100%",

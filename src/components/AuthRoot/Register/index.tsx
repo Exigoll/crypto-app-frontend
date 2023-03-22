@@ -1,32 +1,24 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import React from "react";
 
+import AppButton from "@/components/AppButton";
+
 import { IPropsRegister } from "@/common/types/auth";
+
+import { useStyles } from "../styles";
 
 const Register: React.FC<IPropsRegister> = (
   props: IPropsRegister
 ): JSX.Element => {
   const { navigate, register, errors } = props;
+  const classes = useStyles();
 
   return (
     <>
-      <Typography
-        sx={{
-          fontFamily: "Poppins",
-          textAlign: "center",
-        }}
-        variant="h3"
-      >
+      <Typography variant="h3" textAlign="center" fontSize="32px">
         Регистрация
       </Typography>
-      <Typography
-        sx={{
-          fontFamily: "Poppins",
-          textAlign: "center",
-          marginBottom: 3,
-        }}
-        variant="body1"
-      >
+      <Typography variant="body1" textAlign="center" marginBottom="3px">
         Введите данные для регистрации
       </Typography>
       <TextField
@@ -86,26 +78,15 @@ const Register: React.FC<IPropsRegister> = (
         }
         {...register("confirmPassword")}
       />
-      <Button
-        sx={{
-          fontFamily: "Poppins",
-          marginTop: 2,
-          marginBottom: 2,
-          width: "60%",
-        }}
-        variant="contained"
-        type="submit"
-      >
+      <AppButton variant="contained" type="submit">
         Регистрация
-      </Button>
-      <Typography
-        variant="body1"
-        sx={{
-          fontFamily: "Poppins",
-        }}
-      >
+      </AppButton>
+      <Typography variant="body1">
         У Вас уже есть аккаунт?
-        <span className="incitingText" onClick={() => navigate("/login")}>
+        <span
+          className={classes.incitingText}
+          onClick={() => navigate("/login")}
+        >
           Авторизация
         </span>
       </Typography>

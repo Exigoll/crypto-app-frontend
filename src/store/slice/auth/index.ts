@@ -21,7 +21,7 @@ const initialState: IAuthState = {
       },
     ],
   },
-  isLogged: false /* -> false */,
+  isLogged: true /* -> false */,
 };
 
 export const authSlice = createSlice({
