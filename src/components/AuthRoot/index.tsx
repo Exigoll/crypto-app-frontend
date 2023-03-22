@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { AppErrors } from "@/common/errors";
@@ -22,14 +23,18 @@ const AuthRoot: React.FC = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const handleSubmitForm = async (data: any) => {
     if (location.pathname === "/login") {
       try {
         const userData = {
-          email,
-          password,
+          email: data.email,
+          password: data.password,
         };
         const user = await instance.post("/auth/login", userData);
         await dispatch(login(user.data));
@@ -60,7 +65,7 @@ const AuthRoot: React.FC = (): JSX.Element => {
 
   return (
     <div className="root">
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
         <Box
           display="flex"
           flexDirection="column"
@@ -73,11 +78,7 @@ const AuthRoot: React.FC = (): JSX.Element => {
           boxShadow={`5px 5px 10px #ccc`}
         >
           {location.pathname === "/login" ? (
-            <Login
-              setEmail={setEmail}
-              setPassword={setPassword}
-              navigate={navigate}
-            />
+            <Login navigate={navigate} register={register} errors={errors} />
           ) : location.pathname === "/register" ? (
             <Register
               setEmail={setEmail}
