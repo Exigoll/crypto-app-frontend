@@ -24,7 +24,6 @@ import FlexBetween from "@/components/FlexBetween";
 import Logo from "@/assets/images/side-bar/logo.svg";
 
 import { navMenu } from "@/common/moks/navigate";
-import { tokens } from "@/common/theme";
 import { ISideBar } from "@/common/types/sideBar";
 
 import { useStyles } from "./styles";
@@ -36,7 +35,6 @@ const SideBar: FC<ISideBar> = (props: ISideBar) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
     setActive(pathname.substring(1));
@@ -51,7 +49,7 @@ const SideBar: FC<ISideBar> = (props: ISideBar) => {
         >
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText>
-            <Typography>{item.title}</Typography>
+            <Typography variant="body1">{item.title}</Typography>
           </ListItemText>
         </ListItemButton>
       </ListItem>

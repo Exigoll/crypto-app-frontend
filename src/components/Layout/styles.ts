@@ -9,6 +9,6 @@ export const useStyles: any = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: "100%",
+    flexGrow: 1,
   },
 });

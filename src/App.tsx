@@ -19,9 +19,9 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Layout>
-          <div className="App">
-            <Routes>
+        <div className="App">
+          <Routes>
+            <Route element={<Layout />}>
               <Route element={<PrivateRoute />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/watchlist" element={<Watchlist />} />
@@ -30,9 +30,9 @@ function App() {
               </Route>
               <Route path="login" element={<AuthRoot />} />
               <Route path="register" element={<AuthRoot />} />
-            </Routes>
-          </div>
-        </Layout>
+            </Route>
+          </Routes>
+        </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
