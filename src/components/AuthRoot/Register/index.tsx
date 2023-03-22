@@ -3,14 +3,11 @@ import React from "react";
 
 import { IPropsRegister } from "@/common/types/auth";
 
-const Register: React.FC<IPropsRegister> = ({
-  setEmail,
-  setPassword,
-  setRepeatPassword,
-  setFirstName,
-  setUserName,
-  navigate,
-}: IPropsRegister): JSX.Element => {
+const Register: React.FC<IPropsRegister> = (
+  props: IPropsRegister
+): JSX.Element => {
+  const { navigate, register, errors } = props;
+
   return (
     <>
       <Typography
@@ -39,7 +36,9 @@ const Register: React.FC<IPropsRegister> = ({
         label="Имя"
         placeholder="Введите Ваше имя"
         variant="outlined"
-        onChange={(e) => setFirstName(e.target.value)}
+        error={!!errors.firstName}
+        helperText={errors.firstName ? `${errors.firstName.message}` : ""}
+        {...register("firstName")}
       />
       <TextField
         margin="normal"
@@ -48,7 +47,9 @@ const Register: React.FC<IPropsRegister> = ({
         label="Логин"
         placeholder="Введите Ваш логин"
         variant="outlined"
-        onChange={(e) => setUserName(e.target.value)}
+        error={!!errors.userName}
+        helperText={errors.userName ? `${errors.userName.message}` : ""}
+        {...register("userName")}
       />
       <TextField
         margin="normal"
@@ -57,7 +58,9 @@ const Register: React.FC<IPropsRegister> = ({
         label="E-mail"
         placeholder="Введите E-mail"
         variant="outlined"
-        onChange={(e) => setEmail(e.target.value)}
+        error={!!errors.email}
+        helperText={errors.email ? `${errors.email.message}` : ""}
+        {...register("email")}
       />
       <TextField
         margin="normal"
@@ -66,7 +69,9 @@ const Register: React.FC<IPropsRegister> = ({
         label="Пароль"
         placeholder="Введите пароль"
         variant="outlined"
-        onChange={(e) => setPassword(e.target.value)}
+        error={!!errors.password}
+        helperText={errors.password ? `${errors.password.message}` : ""}
+        {...register("password")}
       />
       <TextField
         margin="normal"
@@ -75,7 +80,11 @@ const Register: React.FC<IPropsRegister> = ({
         label="Пароль"
         placeholder="Повторите пароль"
         variant="outlined"
-        onChange={(e) => setRepeatPassword(e.target.value)}
+        error={!!errors.confirmPassword}
+        helperText={
+          errors.confirmPassword ? `${errors.confirmPassword.message}` : ""
+        }
+        {...register("confirmPassword")}
       />
       <Button
         sx={{

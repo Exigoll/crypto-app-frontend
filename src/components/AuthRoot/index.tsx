@@ -1,5 +1,6 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Box } from "@mui/material";
-import React from "react";
+import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -9,17 +10,13 @@ import { login } from "@/store/slice/auth";
 
 import { instance } from "@/utils/axios";
 import { useAppDispatch } from "@/utils/hooks";
+import { LoginSchema, RegisterSchema } from "@/utils/validation";
 
 import Login from "./Login";
 import Register from "./Register";
 import "./style.scss";
 
-const AuthRoot: React.FC = (): JSX.Element => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [repeatPassword, setRepeatPassword] = React.useState("");
-  const [firstName, setFirstName] = React.useState("");
-  const [userName, setUserName] = React.useState("");
+const AuthRoot: FC = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -27,7 +24,12 @@ const AuthRoot: React.FC = (): JSX.Element => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(
+      location.pathname === "/login" ? LoginSchema : RegisterSchema
+    ),
+    mode: "onBlur",
+  });
 
   const handleSubmitForm = async (data: any) => {
     if (location.pathname === "/login") {
@@ -43,13 +45,13 @@ const AuthRoot: React.FC = (): JSX.Element => {
         return e;
       }
     } else {
-      if (password === repeatPassword) {
+      if (data.password === data.confirmPassword) {
         try {
           const userData = {
-            firstName,
-            userName,
-            email,
-            password,
+            firstName: data.firstName,
+            userName: data.userName,
+            email: data.email,
+            password: data.password,
           };
           const newUser = await instance.post("/auth/register", userData);
           await dispatch(login(newUser.data));
@@ -80,14 +82,7 @@ const AuthRoot: React.FC = (): JSX.Element => {
           {location.pathname === "/login" ? (
             <Login navigate={navigate} register={register} errors={errors} />
           ) : location.pathname === "/register" ? (
-            <Register
-              setEmail={setEmail}
-              setPassword={setPassword}
-              setRepeatPassword={setRepeatPassword}
-              setFirstName={setFirstName}
-              setUserName={setUserName}
-              navigate={navigate}
-            />
+            <Register navigate={navigate} register={register} errors={errors} />
           ) : null}
         </Box>
       </form>
