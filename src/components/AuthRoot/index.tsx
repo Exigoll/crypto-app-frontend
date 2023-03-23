@@ -6,10 +6,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { AppErrors } from "@/common/errors";
 
-import { login } from "@/store/slice/auth";
+import { loginUser, registerUser } from "@/store/thunks";
 
-import { instance } from "@/utils/axios";
-import { useAppDispatch } from "@/utils/hooks";
+import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { LoginSchema, RegisterSchema } from "@/utils/validation";
 
 import Login from "./Login";
@@ -21,6 +20,7 @@ const AuthRoot: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
+  const loading = useAppSelector((state) => state.auth.isLoading);
   const {
     register,
     formState: { errors },
@@ -35,12 +35,7 @@ const AuthRoot: FC = (): JSX.Element => {
   const handleSubmitForm = async (data: any) => {
     if (location.pathname === "/login") {
       try {
-        const userData = {
-          email: data.email,
-          password: data.password,
-        };
-        const user = await instance.post("/auth/login", userData);
-        await dispatch(login(user.data));
+        await dispatch(loginUser(data));
         navigate("/");
       } catch (e) {
         return e;
@@ -54,8 +49,7 @@ const AuthRoot: FC = (): JSX.Element => {
             email: data.email,
             password: data.password,
           };
-          const newUser = await instance.post("/auth/register", userData);
-          await dispatch(login(newUser.data));
+          await dispatch(registerUser(userData));
           navigate("/");
         } catch (e) {
           return e;
@@ -69,21 +63,21 @@ const AuthRoot: FC = (): JSX.Element => {
   return (
     <div className={classes.root}>
       <form className={classes.form} onSubmit={handleSubmit(handleSubmitForm)}>
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          maxWidth={640}
-          margin="auto"
-          padding={5}
-          borderRadius={5}
-          boxShadow={`-3px -2px 20px 1px #202020`}
-        >
+        <Box className={classes.wrapper}>
           {location.pathname === "/login" ? (
-            <Login navigate={navigate} register={register} errors={errors} />
+            <Login
+              navigate={navigate}
+              register={register}
+              errors={errors}
+              loading={loading}
+            />
           ) : location.pathname === "/register" ? (
-            <Register navigate={navigate} register={register} errors={errors} />
+            <Register
+              navigate={navigate}
+              register={register}
+              errors={errors}
+              loading={loading}
+            />
           ) : null}
         </Box>
       </form>
