@@ -1,7 +1,7 @@
 import { TextField, Typography } from "@mui/material";
 import React from "react";
 
-import AppButton from "@/components/AppButton";
+import AppLoadingButton from "@/components/LoadingButton";
 
 import { IPropsRegister } from "@/common/types/auth";
 
@@ -10,7 +10,7 @@ import { useStyles } from "../styles";
 const Register: React.FC<IPropsRegister> = (
   props: IPropsRegister
 ): JSX.Element => {
-  const { navigate, register, errors } = props;
+  const { navigate, register, errors, loading } = props;
   const classes = useStyles();
 
   return (
@@ -78,9 +78,9 @@ const Register: React.FC<IPropsRegister> = (
         }
         {...register("confirmPassword")}
       />
-      <AppButton variant="contained" type="submit">
+      <AppLoadingButton variant="contained" type="submit" loading={loading}>
         Регистрация
-      </AppButton>
+      </AppLoadingButton>
       <Typography variant="body1">
         У Вас уже есть аккаунт?
         <span

@@ -38,7 +38,9 @@ const TopBar: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
             className={classes.menuIcon}
             onClick={() => setIsOpen(!isOpen)}
           />
-          <Typography variant="h3">Привет Андрей!</Typography>
+          <Typography variant="h3">
+            Добро пожаловать, {sessionStorage.getItem("name")}
+          </Typography>
         </FlexBetween>
         <Box display="flex">
           <Grid className={classes.iconBlock}>
