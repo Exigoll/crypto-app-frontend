@@ -8,7 +8,7 @@ import TopBar from "@/components/TopBar";
 import { useStyles } from "./styles";
 
 const Layout: FC = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
   const isNonMobile = useMediaQuery("(min-width: 768px)");
   const classes = useStyles();

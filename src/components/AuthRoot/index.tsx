@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { AppErrors } from "@/common/errors";
 
-import { loginUser, registerUser } from "@/store/thunks";
+import { loginUser, registerUser } from "@/store/thunks/auth";
 
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { LoginSchema, RegisterSchema } from "@/utils/validation";
