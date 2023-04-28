@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-const Settings: FC = () => {
+const SettingsPage: FC = () => {
   return (
     <div>
       <h1>index</h1>
     </div>
   );
 };
-export default Settings;
+export default SettingsPage;

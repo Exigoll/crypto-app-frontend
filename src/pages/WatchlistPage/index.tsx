@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const Watchlist: FC = () => {
+const WatchlistPage: FC = () => {
   return (
     <div>
       <h1>Watchlist</h1>
@@ -8,4 +8,4 @@ const Watchlist: FC = () => {
   );
 };
 
-export default Watchlist;
+export default WatchlistPage;

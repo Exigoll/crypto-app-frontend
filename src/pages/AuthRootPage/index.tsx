@@ -4,6 +4,9 @@ import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import LoginPage from "@/pages/AuthRootPage/LoginPage";
+import RegisterPage from "@/pages/AuthRootPage/RegisterPage";
+
 import { AppErrors } from "@/common/errors";
 
 import { loginUser, registerUser } from "@/store/thunks/auth";
@@ -11,11 +14,9 @@ import { loginUser, registerUser } from "@/store/thunks/auth";
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { LoginSchema, RegisterSchema } from "@/utils/validation";
 
-import Login from "./Login";
-import Register from "./Register";
 import { useStyles } from "./styles";
 
-const AuthRoot: FC = (): JSX.Element => {
+const AuthRootPage: FC = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -65,14 +66,14 @@ const AuthRoot: FC = (): JSX.Element => {
       <form className={classes.form} onSubmit={handleSubmit(handleSubmitForm)}>
         <Box className={classes.wrapper}>
           {location.pathname === "/login" ? (
-            <Login
+            <LoginPage
               navigate={navigate}
               register={register}
               errors={errors}
               loading={loading}
             />
           ) : location.pathname === "/register" ? (
-            <Register
+            <RegisterPage
               navigate={navigate}
               register={register}
               errors={errors}
@@ -85,4 +86,4 @@ const AuthRoot: FC = (): JSX.Element => {
   );
 };
 
-export default AuthRoot;
+export default AuthRootPage;

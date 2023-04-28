@@ -1,10 +1,10 @@
 import React from "react";
 
-const News: React.FC = () => {
+const NewsPage: React.FC = () => {
   return (
     <div>
       <h1>index</h1>
     </div>
   );
 };
-export default News;
+export default NewsPage;

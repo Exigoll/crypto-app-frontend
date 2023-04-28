@@ -7,7 +7,7 @@ import { IPropsRegister } from "@/common/types/auth";
 
 import { useStyles } from "../styles";
 
-const Register: React.FC<IPropsRegister> = (
+const RegisterPage: React.FC<IPropsRegister> = (
   props: IPropsRegister
 ): JSX.Element => {
   const { navigate, register, errors, loading } = props;
@@ -94,4 +94,4 @@ const Register: React.FC<IPropsRegister> = (
   );
 };
 
-export default Register;
+export default RegisterPage;

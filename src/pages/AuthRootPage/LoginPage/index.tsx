@@ -7,7 +7,7 @@ import { IPropsLogin } from "@/common/types/auth";
 
 import { useStyles } from "../styles";
 
-const Login: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
+const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
   const { navigate, register, errors, loading } = props;
   const classes = useStyles();
 
@@ -57,4 +57,4 @@ const Login: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
   );
 };
 
-export default Login;
+export default LoginPage;
