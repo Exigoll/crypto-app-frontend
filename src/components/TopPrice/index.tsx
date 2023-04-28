@@ -40,12 +40,12 @@ const TopPrice = (props: any): JSX.Element => {
                 <TableCell
                   align="right"
                   className={
-                    element.price_change_24h > 0
+                    element.price_change_percentage_24h > 0
                       ? `${classes.priceUp}`
                       : `${classes.priceDown}`
                   }
                 >
-                  {element.price_change_24h}
+                  {element.price_change_percentage_24h}
                 </TableCell>
                 <TableCell
                   align="right"
@@ -55,7 +55,7 @@ const TopPrice = (props: any): JSX.Element => {
                       : `${classes.priceDown}`
                   }
                 >
-                  {element.price_change_percentage_24h.toFixed(2)}
+                  {element.price_change_24h.toFixed(2)}
                 </TableCell>
               </TableRow>
             ))}

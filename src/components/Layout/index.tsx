@@ -8,7 +8,7 @@ import TopBar from "@/components/TopBar";
 import { useStyles } from "./styles";
 
 const Layout: FC = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const isNonMobile = useMediaQuery("(min-width: 768px)");
   const classes = useStyles();
@@ -31,7 +31,11 @@ const Layout: FC = (): JSX.Element => {
         setIsOpen={setIsOpen}
       />
       <Box className={classes.mainSection}>
-        <TopBar isOpen={isOpen} setIsOpen={setIsOpen} />
+        <TopBar
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          isNonMobile={isNonMobile}
+        />
         <Outlet />
       </Box>
     </Box>
