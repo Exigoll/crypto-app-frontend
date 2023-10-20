@@ -1,27 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { IAuthState } from "@/common/types/auth";
+import { IAuthState, IPublicUser } from "@/common/types/auth";
 
-import { loginUser, registerUser } from "@/store/thunks/auth";
+import { getPublicUser, loginUser, registerUser } from "@/store/thunks/auth";
 
 const initialState: IAuthState = {
   user: {
-    id: null,
-    email: "",
-    firstName: "",
-    userName: "",
-    createdAt: "",
-    updatedAt: "",
-    watchlist: [
-      {
-        id: null,
-        name: "",
-        assetId: "",
-        createdAt: "",
-        updatedAt: "",
-        user: null,
-      },
-    ],
+    token: "",
+    user: {} as IPublicUser,
   },
   isLogged: false,
   isLoading: false,
@@ -57,6 +43,9 @@ export const authSlice = createSlice({
     builder.addCase(registerUser.rejected, (state, action) => {
       state.isLogged = false;
       state.isLoading = false;
+    });
+    builder.addCase(getPublicUser.fulfilled, (state, action) => {
+      state.user = action.payload;
     });
   },
 });

@@ -38,6 +38,12 @@ const SideBar: FC<ISideBarProps> = (props: ISideBarProps): JSX.Element => {
     setActive(pathname);
   }, [pathname]);
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("token");
+    navigate("/login");
+  };
+
   const renderNavMenu = navMenu.map(
     (item): JSX.Element => (
       <ListItem key={item.id}>
@@ -81,7 +87,11 @@ const SideBar: FC<ISideBarProps> = (props: ISideBarProps): JSX.Element => {
               <FlexBetween>
                 <Box className={classes.brand}>
                   <img src={Logo} alt="Logo" />
-                  <Typography className={classes.brandTitle} variant="h1">
+                  <Typography
+                    className={classes.brandTitle}
+                    variant="h1"
+                    sx={{ fontSize: 30 }}
+                  >
                     CryptoPro
                   </Typography>
                 </Box>
@@ -111,7 +121,10 @@ const SideBar: FC<ISideBarProps> = (props: ISideBarProps): JSX.Element => {
                 </ListItem>
               )}
               <ListItem>
-                <ListItemButton className={classes.navItem}>
+                <ListItemButton
+                  className={classes.navItem}
+                  onClick={handleLogout}
+                >
                   <ListItemIcon>
                     <LogoutOutlined />
                   </ListItemIcon>

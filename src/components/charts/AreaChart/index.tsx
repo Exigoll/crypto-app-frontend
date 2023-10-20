@@ -11,6 +11,7 @@ import {
   Tooltip,
 } from "chart.js";
 import moment from "moment";
+import { FC } from "react";
 import { Line } from "react-chartjs-2";
 
 import { IAreaChartProps } from "@/common/types/assets";
@@ -26,7 +27,7 @@ ChartJS.register(
   Legend
 );
 
-const AreaChart = (props: IAreaChartProps) => {
+const AreaChart: FC<IAreaChartProps> = (props: IAreaChartProps) => {
   const { data } = props;
 
   const options = {

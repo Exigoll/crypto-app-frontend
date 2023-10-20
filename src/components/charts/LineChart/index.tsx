@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from "chart.js";
 import moment from "moment";
-import React from "react";
+import { FC } from "react";
 import { Line } from "react-chartjs-2";
 
 import { ILineChartProps } from "@/common/types/assets";
@@ -25,7 +25,7 @@ ChartJS.register(
   Legend
 );
 
-const LineChart = (props: ILineChartProps) => {
+const LineChart: FC<ILineChartProps> = (props: ILineChartProps) => {
   const { data } = props;
 
   const options = {

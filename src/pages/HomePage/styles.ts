@@ -46,7 +46,7 @@ export const useStyles = makeStyles((theme: Theme) => {
       lineHeight: "48px",
     },
     priceTrend: {
-      width: 90,
+      width: 100,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",

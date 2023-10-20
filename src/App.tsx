@@ -13,6 +13,8 @@ import { ColorModeContext, useMode } from "@/common/theme";
 
 import { PrivateRoute } from "@/utils/router";
 
+import SingleAssetPage from "./pages/SingleAssetPage";
+
 function App() {
   const [theme, colorMode] = useMode();
 
@@ -28,6 +30,7 @@ function App() {
                 <Route path="/watchlist" element={<WatchlistPage />} />
                 <Route path="/news" element={<NewsPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/single/:id" element={<SingleAssetPage />} />
               </Route>
               <Route path="login" element={<AuthRootPage />} />
               <Route path="register" element={<AuthRootPage />} />

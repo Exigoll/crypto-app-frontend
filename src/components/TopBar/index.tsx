@@ -1,19 +1,21 @@
-import { MenuOutlined, Search } from "@mui/icons-material";
-import { AppBar, Grid, Toolbar, Typography, useTheme } from "@mui/material";
+import { MenuOutlined } from "@mui/icons-material";
+import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
 import { FC } from "react";
 
 import FlexBetween from "@/components/FlexBetween";
+import { SearchBar } from "@/components/SearchBar";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 import { ITopBarProps } from "@/common/types/topbar";
 
-import { SearchBar } from "../SearchBar";
-import { ThemeSwitcher } from "../ThemeSwitcher";
+import { useAppSelector } from "@/utils/hooks";
 
 import { useStyles } from "./styles";
 
 const TopBar: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
   const { isOpen, setIsOpen, isNonMobile } = props;
   const classes = useStyles();
+  const { user } = useAppSelector((state) => state.auth.user);
 
   return (
     <AppBar className={classes.root} position="static">
@@ -26,7 +28,7 @@ const TopBar: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
                 onClick={() => setIsOpen(!isOpen)}
               />
               <Typography variant="h3">
-                Добро пожаловать, {sessionStorage.getItem("name")}
+                Welcome, {user ? `${user.firstName}` : ""}
               </Typography>
             </FlexBetween>
           </Grid>
