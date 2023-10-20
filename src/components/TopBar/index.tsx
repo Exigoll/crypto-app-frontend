@@ -1,66 +1,44 @@
-import {
-  DarkMode,
-  LightMode,
-  MenuOutlined,
-  NotificationsNone,
-  Search,
-} from "@mui/icons-material";
-import {
-  AppBar,
-  Box,
-  Grid,
-  IconButton,
-  InputBase,
-  Toolbar,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { FC, useContext } from "react";
+import { MenuOutlined } from "@mui/icons-material";
+import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
+import { FC } from "react";
 
 import FlexBetween from "@/components/FlexBetween";
+import { SearchBar } from "@/components/SearchBar";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
-import { ColorModeContext } from "@/common/theme";
 import { ITopBarProps } from "@/common/types/topbar";
+
+import { useAppSelector } from "@/utils/hooks";
 
 import { useStyles } from "./styles";
 
 const TopBar: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
-  const { isOpen, setIsOpen } = props;
-  const theme = useTheme();
-  const colorMode: any = useContext(ColorModeContext);
+  const { isOpen, setIsOpen, isNonMobile } = props;
   const classes = useStyles();
+  const { user } = useAppSelector((state) => state.auth.user);
 
   return (
     <AppBar className={classes.root} position="static">
       <Toolbar className={classes.toolbar}>
-        <FlexBetween>
-          <MenuOutlined
-            className={classes.menuIcon}
-            onClick={() => setIsOpen(!isOpen)}
-          />
-          <Typography variant="h3">
-            Добро пожаловать, {sessionStorage.getItem("name")}
-          </Typography>
-        </FlexBetween>
-        <Box display="flex">
-          <Grid className={classes.iconBlock}>
-            <IconButton
-              className={classes.themeIcon}
-              onClick={colorMode.toggleColorMode}
-            >
-              {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
-            </IconButton>
-            <IconButton>
-              <NotificationsNone />
-            </IconButton>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid item sm={3} lg={3}>
+            <FlexBetween>
+              <MenuOutlined
+                className={classes.menuIcon}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+              <Typography variant="h3">
+                Welcome, {user ? `${user.firstName}` : ""}
+              </Typography>
+            </FlexBetween>
           </Grid>
-          <Grid className={classes.searchBlock}>
-            <IconButton className={classes.searchIcon}>
-              <Search />
-            </IconButton>
-            <InputBase className={classes.searchInput} placeholder="Поиск" />
-          </Grid>
-        </Box>
+          {isNonMobile && (
+            <Grid display="flex" justifyContent="flex-end" item sm={9} lg={9}>
+              <ThemeSwitcher />
+              <SearchBar />
+            </Grid>
+          )}
+        </Grid>
       </Toolbar>
     </AppBar>
   );

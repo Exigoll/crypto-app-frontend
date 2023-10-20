@@ -11,7 +11,6 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { element } from "prop-types";
 import { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -21,6 +20,9 @@ import Logo from "@/assets/images/side-bar/logo.svg";
 
 import { navMenu } from "@/common/moks/navigate";
 import { ISideBarProps } from "@/common/types/sidebar";
+
+import { SearchBar } from "../SearchBar";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 
 import { useStyles } from "./styles";
 
@@ -35,6 +37,12 @@ const SideBar: FC<ISideBarProps> = (props: ISideBarProps): JSX.Element => {
   useEffect(() => {
     setActive(pathname);
   }, [pathname]);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("token");
+    navigate("/login");
+  };
 
   const renderNavMenu = navMenu.map(
     (item): JSX.Element => (
@@ -79,7 +87,11 @@ const SideBar: FC<ISideBarProps> = (props: ISideBarProps): JSX.Element => {
               <FlexBetween>
                 <Box className={classes.brand}>
                   <img src={Logo} alt="Logo" />
-                  <Typography className={classes.brandTitle} variant="h1">
+                  <Typography
+                    className={classes.brandTitle}
+                    variant="h1"
+                    sx={{ fontSize: 30 }}
+                  >
                     CryptoPro
                   </Typography>
                 </Box>
@@ -90,12 +102,29 @@ const SideBar: FC<ISideBarProps> = (props: ISideBarProps): JSX.Element => {
                 )}
               </FlexBetween>
             </Box>
+            <List>
+              {!isNonMobile && (
+                <ListItem>
+                  <SearchBar />
+                </ListItem>
+              )}
+            </List>
             <List className={classes.navList}>{renderNavMenu}</List>
           </Box>
           <Box width="100%">
             <List>
+              {!isNonMobile && (
+                <ListItem>
+                  <Box padding="5px">
+                    <ThemeSwitcher />
+                  </Box>
+                </ListItem>
+              )}
               <ListItem>
-                <ListItemButton className={classes.navItem}>
+                <ListItemButton
+                  className={classes.navItem}
+                  onClick={handleLogout}
+                >
                   <ListItemIcon>
                     <LogoutOutlined />
                   </ListItemIcon>

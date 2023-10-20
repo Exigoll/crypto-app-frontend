@@ -125,6 +125,11 @@ export const themeSettings: any = (mode: string) => {
         fontSize: 18,
         fontWeight: 500,
       },
+      h34: {
+        fontFamily: ["Poppins", "sans-serif"].join(","),
+        fontSize: 16,
+        fontWeight: 500,
+      },
       p: {
         fontFamily: ["Poppins", "sans-serif"].join(","),
         fontSize: 14,

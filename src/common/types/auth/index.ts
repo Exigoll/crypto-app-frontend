@@ -13,12 +13,15 @@ export interface IPropsLogin<
 export interface IPropsRegister extends IPropsLogin {}
 
 export interface IAuthState {
-  user: IPublicUser;
+  user: {
+    user: IPublicUser;
+    token: string;
+  };
   isLogged: boolean;
   isLoading: boolean;
 }
 
-interface IPublicUser {
+export interface IPublicUser {
   id: number | null;
   email: string;
   firstName: string;
